@@ -1,5 +1,5 @@
 <?php
-function task1($arr, bool $param = null)
+function task1($arr, bool $param = false)
 {
     $res = "";
     foreach ($arr as $item) {
@@ -16,28 +16,20 @@ function task1($arr, bool $param = null)
 function task2($symbol)
 {
     $args = func_get_args();
-    if ($symbol == "+") {
-        $res = "0";
-        for ($i = 1; $i < sizeof($args); $i++) {
-            $res += $args[$i];
-        }
-    } elseif ($symbol == "-") {
-        $res = $args[1];
-        for ($i = 1; $i < (sizeof($args) - 1); $i++) {
+    $res = $args[1];
+    
+    for ($i = 1; $i < (sizeof($args) - 1); $i++) {
+        if ($symbol == "+") {
+            $res += $args[$i + 1];
+        } elseif ($symbol == "-") {
             $res -= $args[$i + 1];
-        }
-    } elseif ($symbol == "*") {
-        $res = 1;
-        for ($i = 1; $i < sizeof($args); $i++) {
-            $res *= $args[$i];
-        }
-    } elseif ($symbol == "/") {
-        $res = $args[1];
-        for ($i = 1; $i < (sizeof($args) - 1); $i++) {
+        } elseif ($symbol == "*") {
+            $res *= $args[$i + 1];
+        } elseif ($symbol == "/") {
             $res /= $args[$i + 1];
+        } else {
+            $res = "Error";
         }
-    } else {
-        $res = "Error";
     }
     return $res;
 }
